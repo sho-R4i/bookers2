@@ -1,16 +1,62 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Bookers2</title>
+    <title>Bookers</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <script src="https://kit.fontawesome.com/d78874b31e.js" crossorigin="anonymous"></script>
+
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+    <header></header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <a class="navbar-brand" href="/">
+          <span>Bookers</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+            <ul class="navbar-nav ml-auto">
+            <% if user_signed_in? %>
+            <li class="nav-item">
+              <%= link_to "Home", root_path %>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'Users', user_path(current_user.id) %>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'Books', books_path %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Log out", destroy_user_session_path, method: :delete %>
+            </li>
+            <% else %>
+            <li class="nav-item">
+              <%= link_to "Home", root_path %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "About", about_path %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Sign up", new_user_registration_path %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Log in", new_user_session_path %>
+            </li>
+            <% end %>
+            </ul>
+      </div>
+      </header>
     <%= yield %>
   </body>
+  <footer>
+    <p>CopyRight Infratop.inc</p>
+  </footer>
 </html>
